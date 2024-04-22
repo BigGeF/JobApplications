@@ -1,0 +1,12 @@
+{
+  "name": "328/JobApplications",
+  "authors": [
+    {
+      "name": "Hao Fan",
+      "email": "Fan.Hao@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
