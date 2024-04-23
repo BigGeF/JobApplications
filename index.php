@@ -62,8 +62,14 @@ $f3->route("GET|POST /experience", function ($f3){
 
 $f3->route("GET|POST /jobLists", function (){
     $view = new Template();
-    echo $view->render('views/jobList.html');
+    echo $view->render('views/jobLists.html');
 });
 
+$f3->route("GET|POST /summery", function (){
+
+
+    $view = new Template();
+    echo $view->render('views/summery.html');
+});
 //run fat-free
 $f3->run();
