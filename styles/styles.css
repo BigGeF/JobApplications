@@ -20,3 +20,10 @@ p, ul {
     background-color: #92c744;
     color: white;
 }
+.form-bold-label label {
+    font-weight: bold;
+}
+h2 {
+    border-bottom: 2px solid rgba(201, 179, 179, 0.36); /* Solid black border */
+    padding-bottom: 10px; /* Add some space between the text and the border */
+}
