@@ -60,16 +60,35 @@ $f3->route("GET|POST /experience", function ($f3){
     echo $view->render('views/experience.html');
 });
 
-$f3->route("GET|POST /jobLists", function (){
-    $view = new Template();
-    echo $view->render('views/jobLists.html');
+$f3->route('GET|POST /jobLists', function ($f3) {
+
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Retrieve and store the selected jobs from POST into session
+        $_SESSION['selectedJobs'] = $f3->get('POST.homeDecorJobs');
+
+        // Redirect to summary page
+        $f3->reroute('summary');
+    } else {
+        // If GET, show the form again or another appropriate action
+        $view = new Template();
+        echo $view->render('views/jobLists.html');
+    }
 });
 
-$f3->route("GET|POST /summery", function (){
+$f3->route('GET /summary', function ($f3) {
 
+
+    if (!isset($_SESSION['selectedJobs']) || empty($_SESSION['selectedJobs'])) {
+        $f3->reroute('/jobLists');  // Redirect if no data is present
+    }
+
+    // Make session data available to the template
+    $f3->set('SESSION.selectedJobs', $_SESSION['selectedJobs']);
 
     $view = new Template();
-    echo $view->render('views/summery.html');
+    echo $view->render('views/summary.html');
 });
+
 //run fat-free
 $f3->run();

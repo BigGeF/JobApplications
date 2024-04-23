@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Selection Summary</title>
+</head>
+<body>
+<h1>Job Selection Summary</h1>
+<p>Here are the job categories you selected:</p>
+<ul>
+    <check if="{{ @SESSION.selectedJobs }}">
+        <true>
+            <repeat group="{{ @SESSION.selectedJobs }}" value="{{ @job }}">
+                <li>{{ @job }}</li>
+            </repeat>
+        </true>
+        <false>
+            <li>No job categories selected.</li>
+        </false>
+    </check>
+</ul>
+<a href="/jobLists">Go back to job selection</a>
+</body>
+</html>
