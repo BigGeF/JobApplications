@@ -5,19 +5,18 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-
+require_once('model/validate.php'); // Make sure the path is correct relative to the location of this file
 require_once ('vendor/autoload.php');
 
 $f3 = Base::instance();
-
+//get home page
 $f3->route('GET /', function (){
-
     $view = new Template();
     echo $view ->render('views/home.html');
 });
 
+//Route fo rcollecting personal infomation
 $f3->route('GET|POST /info', function ($f3) {
-
     //check if the form has been posted
     if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         // Retrieve the form data from the POST request
@@ -27,15 +26,14 @@ $f3->route('GET|POST /info', function ($f3) {
         $state = $_POST['state'];
         $phone = $_POST['phone'];
 
+
         // Set the session variables using the Fat-Free Framework's set method
         $f3->set('SESSION.firstName', $firstName);
         $f3->set('SESSION.lastName', $lastName);
         $f3->set('SESSION.email', $email);
         $f3->set('SESSION.state', $state);
         $f3->set('SESSION.phone', $phone);
-
-        // Reroute to the home page (or to another appropriate route)
-        $f3->reroute("experience");
+        $f3->reroute("/experience");
     }
     $view = new Template();
     echo $view->render('views/info.html');
@@ -89,6 +87,8 @@ $f3->route('GET /summary', function ($f3) {
     $view = new Template();
     echo $view->render('views/summary.html');
 });
+
+
 
 //run fat-free
 $f3->run();
