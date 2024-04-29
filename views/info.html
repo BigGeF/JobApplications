@@ -10,8 +10,8 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid d-flex justify-content-between py-3 mx-4">
-        <div class="d-flex flex-column">
-            <a class="navbar-brand" href="#">T&S Seattle Home Solutions</a>
+        <a class="navbar-brand" href="#">T&S Seattle Home Solutions</a>
+        <div>
             <h3>Wallpaper Installer</h3>
             <p>Seattle, Washington - Full time</p>
         </div>
@@ -20,26 +20,44 @@
 <div class="container">
     <h2>Personal Information</h2>
     <form method="POST" action="info" class="form-bold-label">
+        <!-- First Name -->
         <div class="mb-3">
             <label for="firstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" required>
+            <check if="{{ isset(@errors['firstName']) }}">
+                <div class="error">{{ @errors['firstName'] }}</div>
+            </check>
         </div>
+        <!-- Last Name -->
         <div class="mb-3">
             <label for="lastName" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" required>
+            <check if="{{ isset(@errors['lastName']) }}">
+                <div class="error">{{ @errors['lastName'] }}</div>
+            </check>
         </div>
+        <!-- Email -->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+            <check if="{{ isset(@errors['email']) }}">
+                <div class="error">{{ @errors['email'] }}</div>
+            </check>
         </div>
+        <!-- Phone -->
         <div class="mb-3">
             <label for="phone" class="form-label">Phone</label>
-            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number" required>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Need to Enter phone as 123-456-7890" required>
+            <check if="{{ isset(@errors['phone']) }}">
+                <div class="error">{{ @errors['phone'] }}</div>
+            </check>
         </div>
+        <!-- State -->
         <div class="mb-3">
             <label for="state" class="form-label">State</label>
             <select class="form-select" id="state" name="state">
-                <option selected>Washington</option>
+                <option selected>Choose...</option>
+                <option value="Washington">Washington</option>
                 <!-- Add other states here if needed -->
             </select>
         </div>
