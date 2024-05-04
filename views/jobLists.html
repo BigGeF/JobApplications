@@ -26,22 +26,12 @@
     <form method="post" action="jobLists" class="form-bold-label">
         <div class="mb-3">
             <label class="form-check-label">Home Decor Jobs</label>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="homeDecorJobs[]" value="Wallpaper Installation" id="wallpaper">
-                <label class="form-check-label" for="wallpaper">Wallpaper Installation</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="homeDecorJobs[]" value="Custom Furniture Installation" id="furniture">
-                <label class="form-check-label" for="furniture">Custom Furniture Installation</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="homeDecorJobs[]" value="Artwork Installation" id="artwork">
-                <label class="form-check-label" for="artwork">Artwork Installation</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="homeDecorJobs[]" value="Lighting Installation" id="lighting">
-                <label class="form-check-label" for="lighting">Lighting Installation</label>
-            </div>
+            <repeat group="{{ @jobCategories }}" value="{{ @job }}">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="homeDecorJobs[]" value="{{ @job.value }}" id="{{ @job.id }}">
+                    <label class="form-check-label" for="{{ @job.id }}">{{ @job.label }}</label>
+                </div>
+            </repeat>
         </div>
         <button type="submit" name="submit" class="btn btn-green">Next ></button>
     </form>

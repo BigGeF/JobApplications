@@ -60,6 +60,7 @@ $f3->route('GET|POST /info', function ($f3) {
 
 // Route for experience details
 $f3->route("GET|POST /experience", function ($f3){
+
     if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $biography = $_POST['biography'];
         $githubLink = $_POST['githubLink'];
