@@ -10,15 +10,10 @@ function validLastName($lastName) {
     return ctype_alpha($lastName);
 }
 
-// Validate GitHub URL: should be a valid URL
-function validGithub($url) {
-    return filter_var($url, FILTER_VALIDATE_URL);
-}
 
-// Validate Experience: checks if the input is a valid "value" property
-function validExperience($experience) {
-    // Assuming 'experience' should be a numeric value (years), you might adjust this as needed
-    return ctype_digit($experience) || is_numeric($experience);
+function validExperience($yearsExperience, $experienceOptions) {
+    $validValues = array_column($experienceOptions, 'value');
+    return in_array($yearsExperience, $validValues);
 }
 
 // Validate phone number: ensure it contains only numbers and specific symbols like dashes or spaces
@@ -32,4 +27,4 @@ function validEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-?>
+

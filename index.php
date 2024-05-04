@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Turn on error reporting
+// Enable error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -58,8 +58,18 @@ $f3->route('GET|POST /info', function ($f3) {
     echo $view->render('views/info.html');
 });
 
+$f3->set('experienceOptions', [
+    ['id' => 'experience0-2', 'value' => '0-2', 'label' => '0-2 years'],
+    ['id' => 'experience2-4', 'value' => '2-4', 'label' => '2-4 years'],
+    ['id' => 'experience4plus', 'value' => '4+', 'label' => '4+ years']
+]);
+
 // Route for experience details
 $f3->route("GET|POST /experience", function ($f3){
+    // Display current session information, usually for debugging, should be removed in production
+    var_dump($_SESSION);
+
+    $errors = []; // Use $errors as the error array
 
     if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $biography = $_POST['biography'];
@@ -67,31 +77,29 @@ $f3->route("GET|POST /experience", function ($f3){
         $yearsExperience = $_POST['yearsExperience'];
         $relocate = $_POST['relocate'];
 
-        // Initialize an array to store any validation errors
-        $errors = [];
-
         // Validate years of experience
-        if (!validExperience($yearsExperience)) {
-            $errors['yearsExperience'] = "Please enter a valid number for years of experience.";
+        if (!validExperience($yearsExperience, $f3->get('experienceOptions'))) {
+            $errors['yearsExperience'] = "Please select a valid option for years of experience.";
         }
 
-
-        // Proceed if there are no errors
+        // If there are no errors, set session variables and redirect
         if (empty($errors)) {
             $f3->set('SESSION.biography', $biography);
             $f3->set('SESSION.githubLink', $githubLink);
             $f3->set('SESSION.yearsExperience', $yearsExperience);
             $f3->set('SESSION.relocate', $relocate);
-            $f3->reroute('/jobLists');
+            $f3->reroute('/jobLists'); // Ensure the redirection path is correct
         } else {
-            // Store errors in the framework and pass them to the view
+            // Pass errors to the view
             $f3->set('errors', $errors);
+            // Example: if (!validRelocate($relocate)) {$errors['relocate'] = "Invalid relocation option.";}
         }
     }
+
+    // Render the experience view
     $view = new Template();
     echo $view->render('views/experience.html');
 });
-
 
 // Route for job list selection
 $f3->route('GET|POST /jobLists', function ($f3) {

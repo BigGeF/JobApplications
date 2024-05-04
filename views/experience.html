@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,26 +25,32 @@
         <div class="mb-3">
             <label for="biography" class="form-label">Biography</label>
             <textarea class="form-control" id="biography" name="biography" rows="4" placeholder="Your biography..."></textarea>
+            <check if="{{ @errors['biography'] }}">
+                <div class="alert alert-danger">{{ @errors['biography'] }}</div>
+            </check>
         </div>
         <div class="mb-3">
             <label for="githubLink" class="form-label">Github Link</label>
-            <input type="url" class="form-control" id="githubLink" name="githubLink" placeholder="https://github.com/yourusername" >
+            <input type="url" class="form-control" id="githubLink" name="githubLink" placeholder="https://github.com/yourusername">
+            <check if="{{ @errors['githubLink'] }}">
+                <div class="alert alert-danger">{{ @errors['githubLink'] }}</div>
+            </check>
         </div>
         <div class="mb-3">
             <label class="form-label">Years Experience</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="yearsExperience" id="experience0-2" value="0-2" required>
-                <label class="form-check-label" for="experience0-2">0-2 years</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="yearsExperience" id="experience2-4" value="2-4">
-                <label class="form-check-label" for="experience2-4">2-4 years</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="yearsExperience" id="experience4plus" value="4+">
-                <label class="form-check-label" for="experience4plus">4+ years</label>
-            </div>
+            <repeat group="{{ @experienceOptions }}" value="{{ @option }}">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="yearsExperience"
+                           id="{{ @option.id }}" value="{{ @option.value }}"
+                           {{ @option.value == @SESSION.yearsExperience ? 'checked' : '' }} required>
+                    <label class="form-check-label" for="{{ @option.id }}">{{ @option.label }}</label>
+                </div>
+            </repeat>
+            <check if="{{ @errors['yearsExperience'] }}">
+                <div class="alert alert-danger">{{ @errors['yearsExperience'] }}</div>
+            </check>
         </div>
+
         <div class="mb-4">
             <label class="form-label">Willing To Relocate</label>
             <div class="form-check">
@@ -60,6 +65,9 @@
                 <input class="form-check-input" type="radio" name="relocate" id="relocateMaybe" value="maybe">
                 <label class="form-check-label" for="relocateMaybe">Maybe</label>
             </div>
+            <check if="{{ @errors['relocate'] }}">
+                <div class="alert alert-danger">{{ @errors['relocate'] }}</div>
+            </check>
         </div>
         <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-green">Next ></button>
