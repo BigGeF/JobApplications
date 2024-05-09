@@ -42,7 +42,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="yearsExperience"
                            id="{{ @option.id }}" value="{{ @option.value }}"
-                           {{ @option.value == @SESSION.yearsExperience ? 'checked' : '' }} required>
+                           {{ @option.value == @SESSION.yearsExperience ? 'checked' : '' }} >
                     <label class="form-check-label" for="{{ @option.id }}">{{ @option.label }}</label>
                 </div>
             </repeat>
