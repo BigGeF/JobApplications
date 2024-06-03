@@ -27,20 +27,20 @@
         <!-- Applicant Information Section -->
         <div class="col-md-6">
             <h2>Applicant Information</h2>
-            <p><strong>Name:</strong> {{ @SESSION.firstName }} {{ @SESSION.lastName }}</p>
-            <p><strong>Email:</strong> {{ @SESSION.email }}</p>
-            <p><strong>State:</strong> {{ @SESSION.state }}</p>
-            <p><strong>Phone:</strong> {{ @SESSION.phone }}</p>
-            <p><strong>GitHub Link:</strong> <a href="{{ @SESSION.githubLink }}" target="_blank">{{ @SESSION.githubLink }}</a></p>
-            <p><strong>Experience:</strong> {{ @SESSION.yearsExperience }} years</p>
-            <p><strong>Willing To Relocate:</strong> {{ @SESSION.relocate }}</p>
+            <p><strong>Name:</strong> {{ @firstName }} {{ @lastName }}</p>
+            <p><strong>Email:</strong> {{ @email }}</p>
+            <p><strong>State:</strong> {{ @state }}</p>
+            <p><strong>Phone:</strong> {{ @phone }}</p>
+            <p><strong>GitHub Link:</strong> <a href="{{ @githubLink }}" target="_blank">{{ @githubLink }}</a></p>
+            <p><strong>Experience:</strong> {{ @yearsExperience }} years</p>
+            <p><strong>Willing To Relocate:</strong> {{ @relocate }}</p>
 
             <!-- Mailing Lists Section -->
             <h2>Mailing Lists</h2>
             <ul>
-                <check if="{{ is_array(@SESSION.selectedJobs) }}">
+                <check if="{{ is_array(@selectedJobs) }}">
                     <true>
-                        <repeat group="{{ @SESSION.selectedJobs }}" value="{{ @job }}">
+                        <repeat group="{{ @selectedJobs }}" value="{{ @job }}">
                             <li>{{ @job }}</li>
                         </repeat>
                     </true>
